@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스마트전장개발팀 주간업무 보고</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">SMART ELECTRICAL DEVELOPMENT TEAM</p>
+        <h1>주간업무 보고</h1>
+        <p id="weekLabel" class="subtext"></p>
+      </div>
+      <button id="adminToggleBtn" class="secondary-btn">팀장님 조회</button>
+    </header>
+
+    <main>
+      <section id="reportSection" class="panel">
+        <div class="panel-title-row">
+          <div>
+            <h2>주간업무 작성</h2>
+            <p>임시저장 후 최종 제출해 주세요.</p>
+          </div>
+          <span id="statusBadge" class="badge badge-muted">미작성</span>
+        </div>
+
+        <div class="form-grid compact">
+          <label>
+            작성자
+            <select id="employeeName"></select>
+          </label>
+          <label>
+            개인 비밀번호
+            <input id="employeePin" type="password" inputmode="numeric" maxlength="8" placeholder="개인 비밀번호" />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            전주 개발업무
+            <textarea id="prevDevelopment" placeholder="전주 개발업무를 입력하세요."></textarea>
+          </label>
+          <label>
+            전주 통상업무
+            <textarea id="prevRoutine" placeholder="전주 통상업무를 입력하세요."></textarea>
+          </label>
+          <label>
+            금주 개발업무
+            <textarea id="currDevelopment" placeholder="금주 개발업무를 입력하세요."></textarea>
+          </label>
+          <label>
+            금주 통상업무
+            <textarea id="currRoutine" placeholder="금주 통상업무를 입력하세요."></textarea>
+          </label>
+          <label>
+            출장
+            <textarea id="businessTrip" placeholder="출장 일정 또는 계획을 입력하세요. 없으면 '없음'"></textarea>
+          </label>
+          <label>
+            기타
+            <textarea id="etc" placeholder="기타 공유사항을 입력하세요."></textarea>
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="loadBtn" class="secondary-btn">기존 내용 불러오기</button>
+          <button id="draftBtn" class="secondary-btn">임시저장</button>
+          <button id="submitBtn" class="primary-btn">최종 제출</button>
+        </div>
+
+        <p id="message" class="message"></p>
+      </section>
+
+      <section id="adminSection" class="panel hidden">
+        <div class="panel-title-row">
+          <div>
+            <h2>팀장님 조회</h2>
+            <p>주차별 제출 현황과 내용을 확인할 수 있습니다.</p>
+          </div>
+          <button id="closeAdminBtn" class="secondary-btn">작성 화면</button>
+        </div>
+
+        <div id="adminLoginBox" class="admin-login">
+          <label>
+            관리자 비밀번호
+            <input id="adminPassword" type="password" placeholder="관리자 비밀번호" />
+          </label>
+          <button id="adminLoginBtn" class="primary-btn">조회</button>
+        </div>
+
+        <div id="adminDashboard" class="hidden">
+          <div class="dashboard-toolbar">
+            <label>
+              조회 주차
+              <input id="adminWeek" type="date" />
+            </label>
+            <div class="button-row">
+              <button id="refreshBtn" class="secondary-btn">새로고침</button>
+              <button id="copyAllBtn" class="secondary-btn">전체 내용 복사</button>
+              <button id="csvBtn" class="primary-btn">CSV 다운로드</button>
+            </div>
+          </div>
+
+          <div id="summaryCards" class="summary-cards"></div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>이름</th>
+                  <th>상태</th>
+                  <th>제출/수정 일시</th>
+                  <th>내용</th>
+                </tr>
+              </thead>
+              <tbody id="reportTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <p id="adminMessage" class="message"></p>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="detailDialog">
+    <div class="dialog-head">
+      <h3 id="dialogTitle">주간업무 상세</h3>
+      <button id="dialogCloseBtn" class="icon-btn">×</button>
+    </div>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
