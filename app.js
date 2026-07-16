@@ -5,8 +5,7 @@ const TEAM_MEMBERS = [
   "장동호",
   "이다연",
   "장래홍",
-  "조예은",
-  "김형섭"
+  "조예은"
 ];
 
 const FIELD_MAP = {
